@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Vote System</title>
+  <link rel="stylesheet" href="main.css" type="text/css">
+</head>
+<body>
+  <div id="head">
+    <a href="/" class="band">Vote System</a>
+    <div id="toolbar">
+      <img src="icon-cog-small.png" alt="Config">
+    </div>
+    <div id="toolbar-content" style="display:none;">
+      <div class="item"><a href="" id="new-person" data-toggle="modal" data-target="#addPerson"><i class="icon-new-person"></i></a></div>
+      <div class="item"><a href="" id="new-board" data-toggle="modal" data-target="#addBoard"><i class="icon-new-tab"></i></a></div>
+      <div class="item"><a href="" id="empty-record"><i class="icon-empty-record"></i></a></div>
+      <div class="item"><a href="" id="delete-all"><i class="icon-delete-all"></i></a></div>
+      <div class="arrow"></div>
+    </div>
+  </div>
+  <div id="side-bar">
+    <ul id="tab-list">
+    </ul>
+    <div id="side-content">
+      <textarea name="people" id="" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div id="score-boards">
+  </div>
+  <div id="config">Config</div>
+  <footer class = "footer" style = "margin-top: 50px; border-top: 1px solid grey; padding-top; 10px;">
+    <div class = "container">
+      <p>Designed and built by <a href="http://dujiakun.com" target="_blank">DuJiakun</a></p>
+      <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    </div>
+  </footer>
+
+  <div id="addBoard" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addBoardLabel" aria-hidden="true" style="display:none;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="addBoardLabel">Add Board</h3>
+    </div>
+    <div class="modal-body">
+      <textarea name="boardName" id="boardName" cols="36" rows="10"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button class="btn btn-primary" id="confirm_add_board">Save changes</button>
+    </div>
+  </div>
+
+  <div id="addPerson" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addPersonLabel" aria-hidden="true" style="display:none;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="addPersonLabel">Add Person</h3>
+    </div>
+    <div class="modal-body">
+      <select id="boardToAdd"></select>
+      <textarea name="personName" id="personName" cols="36" rows="10"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button class="btn btn-primary" id="confirm_add_person">Save changes</button>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="json2.js"></script>
+  <script type="text/javascript" src="underscore-min.js"></script>
+  <script type="text/javascript" src="backbone-min.js"></script>
+  <script type="text/javascript" src="backbone.localStorage.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="score-board.js"></script>
+
+  <script type="text/template" id="person-template">
+  <div class="job view-job"><%= job %></div>
+  <input class="edit-job" type="text" value="<%- job %>" />
+  <div class="name view-name"><%= name %></div>
+  <input class="edit-name" type="text" value="<%- name %>" />
+  <div class="score"><%= score %></div>
+  <div class="mark-bar">
+  <a href="#" class="btn btn-green" data-mark="1">1</a>
+  <a href="#" class="btn btn-red" data-mark="-1">-1</a>
+  </div>
+  </script>
+
+  <script type="text/template" id="board-tab-template">
+  <li>
+  <a href="#score-board-<%- _id %>" >
+  <%- first_letter %>
+  <p><%- name %></p>
+  </a>
+  </li>
+  </script>
+
+  <script type="text/template" id="board-template">
+  <div id="score-board-<%- _id %>"></div>
+  </script>
+
+</body>
+</html>
